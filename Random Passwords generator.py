@@ -1,6 +1,6 @@
 import random
 import string
-gen_password = ""
+
 
 password_leng = 0
 questions = ["Enter desired password length: ",
@@ -17,25 +17,29 @@ def setting_password(desire_question):
 
 
 def create_password():
+    gen_password = ""
+    letters = string.ascii_lowercase
     try:
-        password_leng = input(questions[0])
+        password_leng = int(input(questions[0]))
     except (ValueError, TypeError):
         print("You dint enter valid number setting length to 12")
         password_leng = 12
-        letters = string.ascii_lowercase
-
-    while len(gen_password) != password_leng:
+    letter_upper = setting_password("letters_upper")
+    digits = setting_password("digits")
+    special = setting_password("special_char")
+    while len(gen_password) < password_leng:
 
         gen_password += random.choice(letters)
-        gen_password += random.choice(setting_password("letters_upper"))
-        gen_password += random.choice(setting_password("digits"))
-        gen_password += random.choice(setting_password("special_char"))
+        gen_password += random.choice(letter_upper)
+        gen_password += random.choice(digits)
 
-    print(f"These is your final password: {gen_password}")
+        gen_password += random.choice(special)
+    return gen_password
 
 
 while True:
-    setting_password("letters_upper")
+    password = create_password()
+    print(f"These is your final password: {password}")
     ask_user = input("You want to create another password? (y/n)")
     if ask_user.lower() == "n":
         break

@@ -36,7 +36,7 @@ def add_task(add):
     global btn_check
     global labels
     global btns
-    if task == [] or add:
+    if add:
         task += [task_entry.get()]
 
     num_task = len(task) - 1
